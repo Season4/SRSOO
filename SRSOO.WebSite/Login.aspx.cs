@@ -18,7 +18,7 @@ public partial class Login : System.Web.UI.Page
             string userName = Request.GetStringValueInForm("username");
             string password = Request.GetStringValueInForm("password");
             string message;
-            User user = UserService.UserLogin(userName, password, out message);
+            User user = StudentService.UserLogin(userName, password, out message);
             if (user!=null)
             {
                 Session["CurrentUser"] = user;

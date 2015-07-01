@@ -25,5 +25,21 @@ public partial class pages_selectCourse : WebBasePage
             Response.Write(jsonResult);
             Response.End();
         }
+        else if (Request.Params["Action"].ConvertToString() == "LoadStudentInfo")
+        {
+            //User u =Session["CurrentUser"] as User:
+            var stu = StudentService.LoadStudentInfo(CurrentUser);
+            //生成ViewModel
+            //匿名对象new{}
+            var stuView = new{
+                ID = stu.ID,
+                Name = stu.Name,
+                Attends = stu.Attends
+            } ;
+            string jsonResult = JSONHelper.ToJson(stuView);
+            
+            Response.Write(jsonResult);
+            Response.End();
+        }
     }
 }
