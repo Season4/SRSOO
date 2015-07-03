@@ -22,13 +22,14 @@ namespace SRSOO.SqlServerDAL
        {
            //应该从数据库读取section数据
            string sql = "select * from Section where SectionNumber={0}".FormatWith(sectionNumber);
+           SqlDataReader dr = SqlHelper.ExecuteReader(ConStr, CommandType.Text, sql);
            if (dr.HasRows == false) return null;
            dr.Read();
            var courseDAO = new CourseDAO();
            var sec = new Section(dr["SectionNumber"].ConvertToIntBaseZero(),
                                  dr["DayOfWeek"].ToString(),
                                  dr["TimeOfDay"].ToString(),
-                                 courseDAO.GetCourse(dr["RepresentedCourse"].ConverToString()),
+                                 courseDAO.GetCourse(dr["RepresentedCourse"].ConvertToString()),
                                  dr["Room"].ToString(),
                                  dr["Capacity"].ConvertToIntBaseZero());
            dr.Close();

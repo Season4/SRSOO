@@ -25,7 +25,7 @@ namespace SRSOO.SqliteDAL
             //访问数据库，获取选课信息
             var attends = new List<Section>();
             string sql1 = @"select * from AttendSection where StudentNumber='0'".FormatWith(id);
-            DataTable attendSec = SqlHelpers.ExecuteDataset(Constr, CommandType.Text, sql1);
+            DataTable attendSec = SqlHelpers.ExecuteDataset(Constr, CommandType.Text, sql1),Tables[0];
             var secDAO = new SectionDAO();
             foreach (DataRow r in attendSec.Rows)
             {
