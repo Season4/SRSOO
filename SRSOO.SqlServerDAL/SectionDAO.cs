@@ -10,14 +10,8 @@ using SRSOO.Util.Extension;
 
 namespace SRSOO.SqlServerDAL
 {
-   public class CourseDAO: DataBase, ISection
+   public class SectionDAO: DataBase, ISection
     {
-       public void Insert(Course course)
-       {
-           throw new NotImplementedException();
-       }
-
- 
        public Section GetSection(int sectionNumber)
        {
            //应该从数据库读取section数据
@@ -31,7 +25,7 @@ namespace SRSOO.SqlServerDAL
                                  dr["TimeOfDay"].ToString(),
                                  courseDAO.GetCourse(dr["RepresentedCourse"].ConvertToString()),
                                  dr["Room"].ToString(),
-                                 dr["Capacity"].ConvertToIntBaseZero());
+                                 dr["SeatingCapacity"].ConvertToIntBaseZero());
            dr.Close();
            dr.Dispose();
 
@@ -40,14 +34,14 @@ namespace SRSOO.SqlServerDAL
 
        }
 
-       public void GetPreRequisites(Course course)
+       public void Insert (Section section)
        {
-           string sql = "select * from Prerequisite where CourseNumber='{0}'".FormatWith(course.CourseNumber);
-           DataTable dt = SqlHelper.ExecuteDataset(ConStr, CommandType.Text, sql).Tables[0];
-           for (int i = 0; i < dt.Rows.Count; i++)
-           {
-               course.AddPrerequisite(GetCourse(dt.Rows[i]["Prerequisite"].ConvertToString()));
-           }
+           throw new NotImplementedException();
+       }
+
+       public Section GeSection(int id)
+       {
+           throw new NotImplementedException();
        }
     }
 }
